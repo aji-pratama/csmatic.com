@@ -1,0 +1,103 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const faqs = [
+  {
+    question: "What is CSMatic?",
+    answer: "CSMatic is an AI-powered chatbot platform that transforms your business data into intelligent, conversational experiences. It allows you to create smart chatbots that can answer customer questions, provide support, and engage with users 24/7 using your own knowledge base."
+  },
+  {
+    question: "How does CSMatic work?",
+    answer: "Simply upload your data sources (websites, documents, FAQs), customize your chatbot's behavior and appearance, then embed it on your website with a simple code snippet. Our AI processes your content and provides accurate, contextual responses to user queries."
+  },
+  {
+    question: "What types of data can I use?",
+    answer: "You can use various data sources including website URLs, PDF documents, text files, FAQs, knowledge base articles, product catalogs, and more. Our platform supports multiple formats to ensure comprehensive coverage of your business information."
+  },
+  {
+    question: "Is there a free plan available?",
+    answer: "Yes! We offer a generous free plan that includes 1 chatbot and 100 conversations per month. This is perfect for small businesses or those wanting to test our platform before upgrading."
+  },
+  {
+    question: "Can I customize the chatbot's appearance?",
+    answer: "Absolutely! You can customize colors, fonts, positioning, chat bubble design, and even add your company logo. Pro and Enterprise plans offer advanced branding options including complete white-labeling."
+  },
+  {
+    question: "How accurate are the chatbot responses?",
+    answer: "Our AI is highly accurate when working with quality data sources. The chatbot learns from your specific content, ensuring responses are relevant and aligned with your business. You can also review and refine responses over time."
+  },
+  {
+    question: "What integrations are available?",
+    answer: "CSMatic integrates with popular platforms including WordPress, Shopify, Slack, Discord, WhatsApp, and many CRM systems. We also provide API access for custom integrations."
+  },
+  {
+    question: "Is my data secure?",
+    answer: "Security is our top priority. We use enterprise-grade encryption, comply with GDPR and CCPA regulations, and never share your data with third parties. Your content is processed securely and stored with industry-standard protection."
+  },
+  {
+    question: "Can the chatbot handle multiple languages?",
+    answer: "Yes, our AI supports multiple languages. You can train your chatbot with content in different languages, and it will respond appropriately to users in their preferred language."
+  },
+  {
+    question: "What happens if the chatbot can't answer a question?",
+    answer: "When the chatbot encounters a question it cannot answer confidently, it can be configured to escalate to human support, collect contact information for follow-up, or provide helpful alternative resources."
+  }
+];
+---
+
+<Layout title="FAQ - CSMatic" description="Frequently asked questions about CSMatic's AI chatbot platform.">
+  <Header />
+  
+  <main class="pt-24">
+    <section class="py-16 bg-white">
+      <div class="max-w-5xl mx-auto px-8 sm:px-12 lg:px-16">
+        <div class="text-center mb-16">
+          <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            Frequently Asked Questions
+          </h1>
+          <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+            Everything you need to know about CSMatic and our AI chatbot platform
+          </p>
+        </div>
+        
+        <div class="space-y-4">
+          {faqs.map((faq, index) => (
+            <details class="group relative overflow-hidden">
+              <div class="absolute -inset-0.5 bg-gradient-to-r from-primary-400/20 to-primary-600/20 rounded-xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
+              <div class="relative bg-white/90 backdrop-blur-md border border-gray-200/60 rounded-xl p-5 hover:border-primary-300 transition-all duration-300 cursor-pointer">
+              <summary class="flex items-center justify-between text-base font-semibold text-gray-900 list-none">
+                <span class="pr-4">{faq.question}</span>
+                <svg class="w-4 h-4 text-gray-500 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </summary>
+              <div class="mt-3 text-sm text-gray-600 leading-relaxed">
+                {faq.answer}
+              </div>
+              </div>
+            </details>
+          ))}
+        </div>
+        
+        <div class="text-center mt-16">
+          <p class="text-gray-600 mb-6">
+            Still have questions? We're here to help!
+          </p>
+          <div class="relative group inline-block">
+            <div class="absolute -inset-0.5 bg-gradient-to-r from-primary-400/20 to-primary-600/20 rounded-xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
+            <a href="mailto:support@csmatic.com" class="relative bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white border border-primary-500/60 px-5 py-2 rounded-lg font-semibold transition-all duration-200 hover:border-primary-600 text-sm">
+            Contact Support
+            <svg class="inline-block w-3 h-3 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+            </svg>
+          </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

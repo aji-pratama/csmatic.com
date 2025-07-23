@@ -1,0 +1,114 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+---
+
+<Layout title={`${post.data.title} - CSMatic Blog`} description={post.data.description}>
+  <Header />
+  
+  <main class="pt-24">
+    <article class="py-16">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <header class="mb-12">
+          <div class="text-center">
+            <div class="flex items-center justify-center text-sm text-gray-500 mb-4">
+              <time datetime={post.data.publishDate.toISOString()}>
+                {post.data.publishDate.toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </time>
+              <span class="mx-2">•</span>
+              <span>{post.data.author}</span>
+            </div>
+            
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+              {post.data.title}
+            </h1>
+            
+            <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-8">
+              {post.data.description}
+            </p>
+            
+            {post.data.tags && (
+              <div class="flex flex-wrap justify-center gap-2">
+                {post.data.tags.map((tag) => (
+                  <span class="bg-primary-100 text-primary-700 px-3 py-1 rounded-full text-sm">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        </header>
+        
+        <div class="prose prose-lg max-w-none">
+          <Content />
+        </div>
+        
+        <div class="mt-16 pt-8 border-t border-gray-200">
+          <div class="text-center">
+            <p class="text-gray-600 mb-6">
+              Ready to transform your customer experience with AI?
+            </p>
+            <a href="/pricing" class="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-8 py-3 rounded-lg font-semibold transition-all duration-200 transform hover:scale-105">
+              Get started for free
+              <svg class="inline-block w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </article>
+  </main>
+  
+  <Footer />
+</Layout>
+
+<style>
+  .prose {
+    @apply text-gray-700;
+  }
+  .prose h1 {
+    @apply text-3xl font-bold text-gray-900 mt-8 mb-4;
+  }
+  .prose h2 {
+    @apply text-2xl font-bold text-gray-900 mt-8 mb-4;
+  }
+  .prose h3 {
+    @apply text-xl font-semibold text-gray-900 mt-6 mb-3;
+  }
+  .prose p {
+    @apply mb-4 leading-relaxed;
+  }
+  .prose ul {
+    @apply mb-4 pl-6;
+  }
+  .prose li {
+    @apply mb-2;
+  }
+  .prose a {
+    @apply text-primary-600 hover:text-primary-700 transition-colors;
+  }
+  .prose strong {
+    @apply font-semibold text-gray-900;
+  }
+  .prose em {
+    @apply italic;
+  }
+</style>
