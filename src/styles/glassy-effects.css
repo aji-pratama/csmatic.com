@@ -1,0 +1,103 @@
+/* Base glassy effect classes */
+
+/* Blue variant (default) */
+.glassy-blue {
+  @apply bg-blue-500/5 backdrop-blur-xl border border-blue-300/20 shadow shadow-blue-500/5 rounded-xl px-4 py-2 relative overflow-hidden;
+}
+
+.glassy-blue-shimmer {
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-blue-200/5 to-transparent animate-pulse;
+}
+
+.glassy-blue-highlight-top {
+  @apply absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-200/30 to-transparent;
+}
+
+.glassy-blue-highlight-bottom {
+  @apply absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-300/10 to-transparent;
+}
+
+/* Primary variant (blue-purple) */
+.glassy-primary {
+  @apply bg-primary-500/5 backdrop-blur-xl border border-primary-300/20 shadow shadow-primary-500/5 rounded-xl px-4 py-2 relative overflow-hidden;
+}
+
+.glassy-primary-shimmer {
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-primary-200/5 to-transparent animate-pulse;
+}
+
+.glassy-primary-highlight-top {
+  @apply absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-primary-200/30 to-transparent;
+}
+
+.glassy-primary-highlight-bottom {
+  @apply absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-primary-300/10 to-transparent;
+}
+
+/* Purple variant */
+.glassy-purple {
+  @apply bg-purple-500/5 backdrop-blur-xl border border-purple-300/20 shadow shadow-purple-500/5 rounded-xl px-4 py-2 relative overflow-hidden;
+}
+
+.glassy-purple-shimmer {
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-purple-200/5 to-transparent animate-pulse;
+}
+
+.glassy-purple-highlight-top {
+  @apply absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-purple-200/30 to-transparent;
+}
+
+.glassy-purple-highlight-bottom {
+  @apply absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-purple-300/10 to-transparent;
+}
+
+/* Red variant */
+.glassy-red {
+  @apply bg-red-500/5 backdrop-blur-xl border border-red-300/20 shadow shadow-red-500/5 rounded-xl px-4 py-2 relative overflow-hidden;
+}
+
+.glassy-red-shimmer {
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-red-200/5 to-transparent animate-pulse;
+}
+
+.glassy-red-highlight-top {
+  @apply absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-red-200/30 to-transparent;
+}
+
+.glassy-red-highlight-bottom {
+  @apply absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-red-300/10 to-transparent;
+}
+
+/* Gray variant */
+.glassy-gray {
+  @apply bg-gray-500/5 backdrop-blur-xl border border-gray-300/20 shadow shadow-gray-500/5 rounded-xl px-4 py-2 relative overflow-hidden;
+}
+
+.glassy-gray-shimmer {
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-gray-200/5 to-transparent animate-pulse;
+}
+
+.glassy-gray-highlight-top {
+  @apply absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gray-200/30 to-transparent;
+}
+
+.glassy-gray-highlight-bottom {
+  @apply absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gray-300/10 to-transparent;
+}
+
+/* White variant (for dark backgrounds) */
+.glassy-white {
+  @apply bg-white/5 backdrop-blur-xl border border-white/20 shadow shadow-white/5 rounded-xl px-4 py-2 relative overflow-hidden;
+}
+
+.glassy-white-shimmer {
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-pulse;
+}
+
+.glassy-white-highlight-top {
+  @apply absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/30 to-transparent;
+}
+
+.glassy-white-highlight-bottom {
+  @apply absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent;
+}
