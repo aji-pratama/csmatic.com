@@ -18,14 +18,16 @@
   // Pricing data
   const pricingData = {
     monthly: [
-      { price: "$0", period: "/month", link: "/signup" },
-      { price: "$49", period: "/month", link: "/signup?plan=pro" },
-      { price: "$199", period: "/month", link: "/contact" }
+      { price: "Rp0", period: "Forever", link: "/signup" },
+      { price: "Rp98k", period: "/ Per Month", link: "/signup?plan=hobby" },
+      { price: "Rp299k", period: "/ Per Month", link: "/signup?plan=standard" },
+      { price: "Rp998k", period: "/ Per Month", link: "/signup?plan=unlimited" }
     ],
     yearly: [
-      { price: "$0", period: "/year", link: "/signup?plan=free-yearly" },
-      { price: "$39", period: "/year", link: "/signup?plan=pro-yearly" },
-      { price: "$159", period: "/year", link: "/contact?plan=enterprise-yearly" }
+      { price: "Rp0", period: "Forever", link: "/signup?plan=free-yearly" },
+      { price: "Rp78k", period: "/ Per Month", link: "/signup?plan=hobby-yearly" },
+      { price: "Rp239k", period: "/ Per Month", link: "/signup?plan=standard-yearly" },
+      { price: "Rp798k", period: "/ Per Month", link: "/signup?plan=unlimited-yearly" }
     ]
   };
 
@@ -39,10 +41,10 @@
 
   // Function to update pricing and links
   function updatePricing(type) {
-    const cards = document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-3 > div');
+    const cards = document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-4 > div');
     
     cards.forEach((card, index) => {
-      if (index < 3) {
+      if (index < 4) {
         const data = pricingData[type][index];
         const priceEl = card.querySelector('span.text-3xl');
         const periodEl = card.querySelector('span.text-gray-600.ml-2');
