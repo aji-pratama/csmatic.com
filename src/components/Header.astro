@@ -22,9 +22,6 @@ const currentPath = Astro.url.pathname;
           <!-- Menu div -->
           <div class="flex items-center justify-between">
             <div class="hidden sm:flex items-center space-x-4 lg:space-x-6 mr-4">
-              <a href="/" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath === '/' ? 'text-primary-600' : 'text-gray-800'}`}>
-                Home
-              </a>
               <a href="/pricing" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath === '/pricing' ? 'text-primary-600' : 'text-gray-800'}`}>
                 Pricing
               </a>
@@ -33,9 +30,6 @@ const currentPath = Astro.url.pathname;
               </a>
               <a href="/help" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath === '/help' ? 'text-primary-600' : 'text-gray-800'}`}>
                 Help
-              </a>
-              <a href="/faq" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath === '/faq' ? 'text-primary-600' : 'text-gray-800'}`}>
-                FAQ
               </a>
             </div>
             
