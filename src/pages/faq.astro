@@ -64,20 +64,20 @@ const faqs = [
         
         <div class="space-y-4">
           {faqs.map((faq, index) => (
-            <details class="group relative overflow-hidden">
+            <div class="group relative overflow-hidden accordion-item">
               <div class="absolute -inset-0.5 bg-gradient-to-r from-primary-400/20 to-primary-600/20 rounded-xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
               <div class="relative bg-white/90 backdrop-blur-md border border-gray-200/60 rounded-xl p-5 hover:border-primary-300 transition-all duration-300 cursor-pointer">
-              <summary class="flex items-center justify-between text-base font-semibold text-gray-900 list-none">
-                <span class="pr-4">{faq.question}</span>
-                <svg class="w-4 h-4 text-gray-500 group-open:rotate-180 transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
-                </svg>
-              </summary>
-              <div class="mt-3 text-sm text-gray-600 leading-relaxed">
-                {faq.answer}
+                <button class="accordion-header w-full flex items-center justify-between text-base font-semibold text-gray-900 list-none">
+                  <span class="pr-4">{faq.question}</span>
+                  <svg class="w-4 h-4 text-gray-500 accordion-icon transition-transform flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </button>
+                <div class="accordion-content hidden mt-3 text-sm text-gray-600 leading-relaxed">
+                  {faq.answer}
+                </div>
               </div>
-              </div>
-            </details>
+            </div>
           ))}
         </div>
         
@@ -101,3 +101,26 @@ const faqs = [
   
   <Footer />
 </Layout>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const accordionHeaders = document.querySelectorAll('.accordion-header');
+    
+    accordionHeaders.forEach(header => {
+      header.addEventListener('click', () => {
+        const content = header.nextElementSibling;
+        const icon = header.querySelector('.accordion-icon');
+        
+        // Toggle content visibility
+        content.classList.toggle('hidden');
+        
+        // Rotate icon when open
+        if (content.classList.contains('hidden')) {
+          icon.classList.remove('rotate-180');
+        } else {
+          icon.classList.add('rotate-180');
+        }
+      });
+    });
+  });
+</script>
