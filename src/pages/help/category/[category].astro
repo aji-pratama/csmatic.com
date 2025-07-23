@@ -1,0 +1,88 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const helpArticles = await getCollection('help');
+  const categories = [...new Set(helpArticles.map(article => article.data.category))];
+  
+  return categories.map(category => ({
+    params: { category: category.toLowerCase().replace(/\s+/g, '-') },
+    props: { 
+      category,
+      articles: helpArticles.filter(article => article.data.category === category)
+    },
+  }));
+}
+
+const { category, articles } = Astro.props;
+
+// Get icon for category
+function getIcon(categoryName: string) {
+  const icons = {
+    "Getting Started": "M13 10V3L4 14h7v7l9-11h-7z",
+    "Account Management": "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z",
+    "Chatbot Configuration": "M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z",
+    "Analytics & Reporting": "M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z",
+    "Troubleshooting": "M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    "API & Developers": "M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+  };
+  return (categoryName in icons ? icons[categoryName as keyof typeof icons] : icons["Troubleshooting"]);
+}
+---
+
+<Layout title={`${category} - CSMatic Help`} description={`Browse all help articles in the ${category} category`}>
+  <Header />
+  
+  <main class="pt-24">
+    <section class="py-16 bg-gradient-to-br from-white to-blue-50">
+      <div class="max-w-5xl mx-auto px-8 sm:px-12 lg:px-16">
+        <div class="mb-8">
+          <a href="/help" class="text-primary-600 hover:text-primary-700 flex items-center text-sm font-medium">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Help Center
+          </a>
+        </div>
+        
+        <div class="flex items-center mb-8">
+          <div class="bg-primary-100/80 backdrop-blur-sm p-3 rounded-lg mr-4">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={getIcon(category)}></path>
+            </svg>
+          </div>
+          <h1 class="text-3xl font-bold text-gray-900">{category}</h1>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {articles.map((article) => (
+            <a href={`/help/${article.slug}`} class="group relative overflow-hidden">
+              <div class="absolute -inset-0.5 bg-gradient-to-r from-primary-400/20 to-primary-600/20 rounded-xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
+              <div class="relative bg-white/90 backdrop-blur-md border border-gray-200/60 rounded-xl p-5 hover:border-primary-300 transition-all duration-300">
+                <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors mb-3">
+                  {article.data.title}
+                </h3>
+                <p class="text-gray-600 text-sm mb-4">{article.data.description}</p>
+                
+                {article.data.tags && (
+                  <div class="flex flex-wrap gap-2">
+                    {article.data.tags.slice(0, 3).map((tag) => (
+                      <span class="bg-gray-100 text-gray-700 px-2 py-1 rounded-full text-xs">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>

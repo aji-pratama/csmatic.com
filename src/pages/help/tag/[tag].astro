@@ -1,0 +1,71 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const helpArticles = await getCollection('help');
+  const allTags = [...new Set(helpArticles.flatMap(article => article.data.tags || []))];
+  
+  return allTags.map(tag => ({
+    params: { tag: tag.toLowerCase().replace(/\s+/g, '-') },
+    props: { 
+      tag,
+      articles: helpArticles.filter(article => article.data.tags?.includes(tag))
+    },
+  }));
+}
+
+const { tag, articles } = Astro.props;
+---
+
+<Layout title={`${tag} - CSMatic Help`} description={`Browse all help articles tagged with ${tag}`}>
+  <Header />
+  
+  <main class="pt-24">
+    <section class="py-16 bg-gradient-to-br from-white to-blue-50">
+      <div class="max-w-5xl mx-auto px-8 sm:px-12 lg:px-16">
+        <div class="mb-8">
+          <a href="/help" class="text-primary-600 hover:text-primary-700 flex items-center text-sm font-medium">
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Help Center
+          </a>
+        </div>
+        
+        <div class="flex items-center mb-8">
+          <div class="bg-primary-100/80 backdrop-blur-sm p-3 rounded-lg mr-4">
+            <svg class="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+            </svg>
+          </div>
+          <h1 class="text-3xl font-bold text-gray-900">Articles tagged with "{tag}"</h1>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {articles.map((article) => (
+            <a href={`/help/${article.slug}`} class="group relative overflow-hidden">
+              <div class="absolute -inset-0.5 bg-gradient-to-r from-primary-400/20 to-primary-600/20 rounded-xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
+              <div class="relative bg-white/90 backdrop-blur-md border border-gray-200/60 rounded-xl p-5 hover:border-primary-300 transition-all duration-300">
+                <div class="flex items-center text-sm text-gray-500 mb-3">
+                  <span class="bg-primary-100 text-primary-700 px-2 py-1 rounded-full text-xs">
+                    {article.data.category}
+                  </span>
+                </div>
+                
+                <h3 class="text-lg font-semibold text-gray-900 group-hover:text-primary-600 transition-colors mb-3">
+                  {article.data.title}
+                </h3>
+                <p class="text-gray-600 text-sm mb-4">{article.data.description}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  
+  <Footer />
+</Layout>
