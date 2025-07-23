@@ -21,14 +21,19 @@
       </p>
       
       <div class="max-w-xl mx-auto mb-8 animate-slide-up">
-        <div class="relative group overflow-hidden">
-          <div class="absolute -inset-0.5 bg-gradient-to-r from-primary-400 to-purple-500 rounded-xl opacity-30 group-hover:opacity-50 transition duration-500"></div>
-          <div class="relative bg-white/90 backdrop-blur-md rounded-xl border border-primary-200/50 p-1.5">
+        <div class="relative group rounded-xl overflow-hidden">
+          <!-- Gradient border effect with inset-0 to fix corner glitch -->
+          <div class="absolute inset-0 bg-gradient-to-r from-primary-400 to-purple-500 rounded-xl opacity-40 group-hover:opacity-60 transition duration-500"></div>
+          
+          <!-- Glossy highlight effect -->
+          <div class="absolute -inset-full h-full w-1/2 z-10 block transform -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-20 group-hover:animate-shine"></div>
+          
+          <div class="relative bg-white/90 backdrop-blur-md rounded-xl border-2 border-primary-200/70 p-2 z-20">
             <div class="flex flex-col sm:flex-row gap-2">
               <input 
                 type="url" 
                 placeholder="Enter your knowledge base URL..."
-                class="flex-1 px-4 py-3 border-0 rounded-lg focus:ring-2 focus:ring-primary-500/20 outline-none text-sm bg-gray-50/50 backdrop-blur-sm"
+                class="flex-1 px-4 py-3 border-0 rounded-lg focus:ring-2 focus:ring-primary-500/30 outline-none text-sm bg-gray-50/50 backdrop-blur-sm"
               >
               <button class="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200">
                 Create chatbot
