@@ -33,6 +33,18 @@ const currentPath = Astro.url.pathname;
               </a>
             </div>
             
+            <!-- Mobile menu button dengan atribut onclick langsung -->
+            <button 
+              id="mobile-menu-button"
+              class="sm:hidden mr-2 text-gray-700 hover:text-primary-600 transition-colors focus:outline-none" 
+              aria-label="Toggle mobile menu"
+              aria-expanded="false"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            
             <div class="flex items-center">
               <a href="/pricing" class="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-2 sm:px-3 py-1.5 rounded-lg font-medium transition-all duration-200 text-xs sm:text-sm">
                 Get started
@@ -40,7 +52,38 @@ const currentPath = Astro.url.pathname;
             </div>
           </div>
         </div>
+        
+        <!-- Mobile menu dropdown -->
+        <div id="mobile-menu" class="sm:hidden hidden pt-2 pb-1">
+          <div class="flex flex-col space-y-2">
+            <a href="/pricing" class={`hover:text-primary-600 transition-colors text-sm font-medium px-2 py-1 rounded ${currentPath === '/pricing' ? 'text-primary-600 bg-blue-50' : 'text-gray-800'}`}>
+              Pricing
+            </a>
+            <a href="/blog" class={`hover:text-primary-600 transition-colors text-sm font-medium px-2 py-1 rounded ${currentPath.startsWith('/blog') ? 'text-primary-600 bg-blue-50' : 'text-gray-800'}`}>
+              Blog
+            </a>
+            <a href="/help" class={`hover:text-primary-600 transition-colors text-sm font-medium px-2 py-1 rounded ${currentPath === '/help' ? 'text-primary-600 bg-blue-50' : 'text-gray-800'}`}>
+              Help
+            </a>
+          </div>
+        </div>
       </nav>
     </div>
   </div>
 </header>
+
+<script is:inline>
+  // Menggunakan is:inline untuk memastikan script dijalankan langsung di browser
+  document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('mobile-menu-button');
+    const menu = document.getElementById('mobile-menu');
+    
+    if (button && menu) {
+      button.addEventListener('click', function() {
+        menu.classList.toggle('hidden');
+        const expanded = menu.classList.contains('hidden') ? 'false' : 'true';
+        button.setAttribute('aria-expanded', expanded);
+      });
+    }
+  });
+</script>
