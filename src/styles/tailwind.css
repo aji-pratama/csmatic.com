@@ -1,0 +1,20 @@
+/* Di bagian akhir file */
+
+/* Glassy Effect Components */
+@layer components {
+  .glassy-element {
+    @apply bg-blue-500/5 backdrop-blur-xl border border-blue-300/20 shadow shadow-blue-500/5 rounded-xl px-4 py-2 relative overflow-hidden;
+  }
+  
+  .glassy-shimmer {
+    @apply absolute inset-0 bg-gradient-to-r from-transparent via-blue-200/5 to-transparent animate-pulse;
+  }
+  
+  .glassy-highlight-top {
+    @apply absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-200/30 to-transparent;
+  }
+  
+  .glassy-highlight-bottom {
+    @apply absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-300/10 to-transparent;
+  }
+}

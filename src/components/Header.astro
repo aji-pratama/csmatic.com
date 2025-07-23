@@ -5,41 +5,48 @@ const currentPath = Astro.url.pathname;
 <header class="fixed top-0 left-0 right-0 z-50">
   <div class="max-w-5xl mx-auto px-8 sm:px-12 lg:px-16 pt-3">
     <div class="flex justify-center">
-      <nav class="bg-white/20 backdrop-blur-xl border border-white/30 rounded-xl px-4 py-2 relative overflow-hidden">
-      <!-- Shimmer effect -->
-      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent animate-pulse"></div>
-      <div class="relative flex items-center justify-between min-w-[280px] sm:min-w-[500px]">
-        <div class="flex items-center">
-          <a href="/" class="text-xl font-bold text-primary-600">
-            CSMatic
-          </a>
+      <nav class="bg-blue-500/5 backdrop-blur-xl border border-blue-300/20 shadow shadow-blue-500/5 rounded-xl px-4 py-2 relative overflow-hidden w-full">
+        <!-- Shimmer effect -->
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-blue-200/5 to-transparent animate-pulse"></div>
+        <!-- Glass highlight effect -->
+        <div class="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-200/30 to-transparent"></div>
+        <div class="absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-300/10 to-transparent"></div>
+        <div class="relative flex items-center justify-between">
+          <!-- Logo div -->
+          <div class="flex items-center">
+            <a href="/" class="text-xl font-bold text-primary-600">
+              CSMatic
+            </a>
+          </div>
+          
+          <!-- Menu div -->
+          <div class="flex items-center justify-between">
+            <div class="hidden sm:flex items-center space-x-4 lg:space-x-6 mr-4">
+              <a href="/" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath === '/' ? 'text-primary-600' : 'text-gray-800'}`}>
+                Home
+              </a>
+              <a href="/pricing" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath === '/pricing' ? 'text-primary-600' : 'text-gray-800'}`}>
+                Pricing
+              </a>
+              <a href="/blog" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath.startsWith('/blog') ? 'text-primary-600' : 'text-gray-800'}`}>
+                Blog
+              </a>
+              <a href="/help" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath === '/help' ? 'text-primary-600' : 'text-gray-800'}`}>
+                Help
+              </a>
+              <a href="/faq" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath === '/faq' ? 'text-primary-600' : 'text-gray-800'}`}>
+                FAQ
+              </a>
+            </div>
+            
+            <div class="flex items-center">
+              <a href="/pricing" class="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-2 sm:px-3 py-1.5 rounded-lg font-medium transition-all duration-200 text-xs sm:text-sm">
+                Get started
+              </a>
+            </div>
+          </div>
         </div>
-        
-        <div class="hidden sm:flex items-center space-x-4 lg:space-x-6">
-          <a href="/" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath === '/' ? 'text-primary-600' : 'text-gray-800'}`}>
-            Home
-          </a>
-          <a href="/pricing" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath === '/pricing' ? 'text-primary-600' : 'text-gray-800'}`}>
-            Pricing
-          </a>
-          <a href="/blog" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath.startsWith('/blog') ? 'text-primary-600' : 'text-gray-800'}`}>
-            Blog
-          </a>
-          <a href="/help" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath === '/help' ? 'text-primary-600' : 'text-gray-800'}`}>
-            Help
-          </a>
-          <a href="/faq" class={`hover:text-primary-600 transition-colors text-sm font-medium ${currentPath === '/faq' ? 'text-primary-600' : 'text-gray-800'}`}>
-            FAQ
-          </a>
-        </div>
-        
-        <div class="flex items-center">
-          <a href="/pricing" class="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white px-2 sm:px-3 py-1.5 rounded-lg font-medium transition-all duration-200 text-xs sm:text-sm">
-            Get started
-          </a>
-        </div>
-      </div>
-    </nav>
+      </nav>
     </div>
   </div>
 </header>

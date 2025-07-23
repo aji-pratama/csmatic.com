@@ -1,0 +1,32 @@
+/* Elemen utama dengan efek glassy */
+.glassy-element {
+  /* Background transparan dengan blur */
+  @apply bg-blue-500/5 backdrop-blur-xl;
+  
+  /* Border tipis dengan warna transparan */
+  @apply border border-blue-300/20;
+  
+  /* Shadow halus */
+  @apply shadow shadow-blue-500/5;
+  
+  /* Rounded corners */
+  @apply rounded-xl;
+  
+  /* Padding dan overflow */
+  @apply px-4 py-2 relative overflow-hidden;
+}
+
+/* Efek shimmer animasi */
+.glassy-shimmer {
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-blue-200/5 to-transparent animate-pulse;
+}
+
+/* Highlight di bagian atas */
+.glassy-highlight-top {
+  @apply absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-blue-200/30 to-transparent;
+}
+
+/* Highlight di bagian bawah */
+.glassy-highlight-bottom {
+  @apply absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-blue-300/10 to-transparent;
+}
