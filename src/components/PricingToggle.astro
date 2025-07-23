@@ -1,0 +1,80 @@
+---
+---
+
+<div class="flex justify-center mb-12">
+  <div class="relative group">
+    <div class="absolute -inset-1 bg-gradient-to-r from-gray-300 to-gray-400 rounded-xl blur opacity-20"></div>
+    <div class="relative bg-gray-100/80 backdrop-blur-sm p-1 rounded-xl border border-gray-200/50">
+      <button id="monthlyBtn" class="px-4 py-2 rounded-lg bg-white/90 text-gray-900 font-medium border border-gray-200/50 text-sm">Monthly</button>
+      <button id="yearlyBtn" class="px-4 py-2 rounded-lg text-gray-600 font-medium text-sm">
+        Yearly
+        <span class="ml-1 bg-green-100/80 text-green-600 px-2 py-1 rounded-full text-xs backdrop-blur-sm">Save 20%</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<script is:inline>
+  // Pricing data
+  const pricingData = {
+    monthly: [
+      { price: "$0", period: "/month", link: "/signup" },
+      { price: "$49", period: "/month", link: "/signup?plan=pro" },
+      { price: "$199", period: "/month", link: "/contact" }
+    ],
+    yearly: [
+      { price: "$0", period: "/year", link: "/signup?plan=free-yearly" },
+      { price: "$39", period: "/year", link: "/signup?plan=pro-yearly" },
+      { price: "$159", period: "/year", link: "/contact?plan=enterprise-yearly" }
+    ]
+  };
+
+  // Function to update button styles
+  function updateButtons(activeBtn, inactiveBtn) {
+    activeBtn.classList.add("bg-white/90", "text-gray-900", "border", "border-gray-200/50");
+    activeBtn.classList.remove("text-gray-600");
+    inactiveBtn.classList.remove("bg-white/90", "text-gray-900", "border", "border-gray-200/50");
+    inactiveBtn.classList.add("text-gray-600");
+  }
+
+  // Function to update pricing and links
+  function updatePricing(type) {
+    const cards = document.querySelectorAll('.grid.grid-cols-1.md\\:grid-cols-3 > div');
+    
+    cards.forEach((card, index) => {
+      if (index < 3) {
+        const data = pricingData[type][index];
+        const priceEl = card.querySelector('span.text-3xl');
+        const periodEl = card.querySelector('span.text-gray-600.ml-2');
+        const linkEl = card.querySelector('a');
+        
+        if (priceEl) priceEl.textContent = data.price;
+        if (periodEl) periodEl.textContent = data.period;
+        if (linkEl) linkEl.href = data.link;
+      }
+    });
+  }
+
+  // Wait for DOM to be fully loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    const monthlyBtn = document.getElementById('monthlyBtn');
+    const yearlyBtn = document.getElementById('yearlyBtn');
+    
+    if (monthlyBtn && yearlyBtn) {
+      // Event listener for monthly button
+      monthlyBtn.addEventListener('click', () => {
+        updateButtons(monthlyBtn, yearlyBtn);
+        updatePricing('monthly');
+      });
+      
+      // Event listener for yearly button
+      yearlyBtn.addEventListener('click', () => {
+        updateButtons(yearlyBtn, monthlyBtn);
+        updatePricing('yearly');
+      });
+      
+      // Set default to monthly
+      updatePricing('monthly');
+    }
+  });
+</script>
